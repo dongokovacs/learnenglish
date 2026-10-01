@@ -285,21 +285,35 @@ function newSay(){say={deck:shuffle(pool()),i:0,res:null,tries:0,sum:0}}
 function stopRec(){try{rec&&rec.abort()}catch(e){}rec=null}
 function listen(){
   if(rec){stopRec();renderSay();return}
-  const w=say.deck[say.i];
-  rec=new SR();rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=3;rec.continuous=false;
-  let got=false;
+  const activeSay=say,w=say.deck[say.i];
+  rec=new SR();rec.lang="en-US";rec.interimResults=true;rec.maxAlternatives=3;rec.continuous=false;
+  let finalResult=null;
   rec.onresult=e=>{
-    got=true;const r=e.results[0],tg=toks(w[2]);let best=null;
-    for(let k=0;k<r.length;k++){const txt=r[k].transcript,ok=align(tg,toks(txt)),n=ok.filter(Boolean).length;if(!best||n>best.n)best={txt,ok,n}}
-    const sc=Math.round(best.n/tg.length*100);
-    say.res={txt:best.txt,ok:best.ok,sc};say.tries++;say.sum+=sc;
+    if(say!==activeSay)return;
+    const tg=toks(w[2]);let transcript="",allFinal=e.results.length>0;
+    for(let i=0;i<e.results.length;i++){
+      const result=e.results[i];let best=result[0];
+      for(let k=1;k<result.length;k++)if(result[k].confidence>best.confidence)best=result[k];
+      transcript+=`${transcript?" ":""}${best.transcript}`;
+      allFinal=allFinal&&result.isFinal;
+    }
+    const ok=align(tg,toks(transcript)),n=ok.filter(Boolean).length;
+    const current={txt:transcript,ok,sc:Math.round(n/tg.length*100)};
+    say.res=current;
+    if(allFinal)finalResult=current;
+    renderSay();
   };
   rec.onerror=e=>{
     if(e.error==="not-allowed"||e.error==="service-not-allowed")note("Nincs mikrofon-hozzáférés. Nyisd meg a linket Chrome-ban vagy Safariban, és engedélyezd a mikrofont.");
     else if(e.error==="no-speech")note("Nem hallottam semmit. Nyomd meg újra, és mondd a mondatot.");
     else if(e.error!=="aborted")note("A beszédfelismerés most nem elérhető ("+e.error+"). Ellenőrizd a netkapcsolatot.");
   };
-  rec.onend=()=>{rec=null;renderSay()};
+  rec.onend=()=>{
+    rec=null;
+    if(say!==activeSay)return;
+    if(finalResult){say.res=finalResult;say.tries++;say.sum+=finalResult.sc}
+    renderSay();
+  };
   try{note("");rec.start();renderSay()}catch(e){rec=null;note("A mikrofont nem sikerült elindítani.")}
 }
 function sentenceHtml(w,res){
