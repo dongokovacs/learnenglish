@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angol jelzők – gyakorló</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>Angol jelzők</h1>
+  <p class="sub">Jellemzők, hétköznapi és tesztelői szavak. Napi 10 perc.</p>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-mode="card" aria-selected="true">Kártyák</button>
+    <button role="tab" data-mode="quiz" aria-selected="false">Kvíz</button>
+    <button role="tab" data-mode="exam" aria-selected="false">Vizsga</button>
+    <button role="tab" data-mode="list" aria-selected="false">Lista</button>
+    <button role="tab" data-mode="say" aria-selected="false">Kiejtés</button>
+  </div>
+
+  <div class="filters">
+    <select id="cat" aria-label="Kategória"></select>
+    <select id="dir" aria-label="Irány">
+      <option value="en2hu">Angol → magyar</option>
+      <option value="hu2en">Magyar → angol</option>
+    </select>
+  </div>
+
+  <p class="note" id="note" hidden></p>
+  <section class="stat" aria-label="Haladás">
+    <div class="stat-top">
+      <div class="stat-num" id="statNum"></div>
+      <div class="stat-pct" id="statPct"></div>
+    </div>
+    <div class="bar" id="bar" role="img"><i class="s-ok" id="bOk"></i><i class="s-due" id="bDue"></i></div>
+    <div class="legend">
+      <span><i class="dot s-ok"></i>Tudod: <b id="lOk">0</b></span>
+      <span><i class="dot s-due"></i>Ismétlésre vár: <b id="lDue">0</b></span>
+      <span><i class="dot s-new"></i>Még nem: <b id="lNew">0</b></span>
+    </div>
+    <p class="progress" id="prog" hidden></p>
+    <details class="cats" id="cats">
+      <summary>Kategóriánként</summary>
+      <div id="catRows"></div>
+    </details>
+  </section>
+
+  <main id="view"></main>
+
+  <p class="foot">A haladásod és az ismétlési időpontok csak ebben a böngészőben mentődnek. <button id="reset">Haladás törlése</button></p>
+</div>
+
+<script type="module" src="./src/app.js"></script>
+</body>
+</html>
