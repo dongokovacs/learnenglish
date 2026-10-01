@@ -48,6 +48,41 @@ select{flex:1;min-width:0;font:500 .9rem "Work Sans",sans-serif;color:var(--ink)
 .crow-h{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px}
 .crow-h span:last-child{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+
+[hidden]{display:none!important}
+.auth-screen{min-height:100dvh;display:grid;place-items:center;padding:28px 20px;background:linear-gradient(145deg,#54191c,#3b1217);color:#fff}
+.auth-panel{width:min(100%,520px);text-align:center}
+.auth-kicker{margin:0 0 10px;color:#f5bd69;font-size:.78rem;font-weight:600}
+.auth-panel h1{margin:0;font:700 2.1rem/1.15 "Work Sans",sans-serif}
+.auth-lead{margin:10px 0 30px;color:#e3c9c7}
+.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,144px));justify-content:center;gap:24px}
+.profile-tile{display:grid;justify-items:center;gap:12px;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+.profile-avatar{display:grid;place-items:center;width:128px;aspect-ratio:1;border-radius:14px;color:#fff;font-size:2rem;font-weight:700;transition:transform 180ms cubic-bezier(.23,1,.32,1),box-shadow 180ms ease}
+.profile-avatar--dani{background:#0877e8}
+.profile-avatar--demo{background:#f3bd08;color:#423100}
+.profile-name{font-size:1rem;font-weight:600}
+.profile-tile:hover .profile-avatar{transform:translateY(-3px);box-shadow:0 12px 24px #17070a55}
+.profile-tile:active .profile-avatar{transform:scale(.97)}
+.profile-tile:focus-visible,.back-button:focus-visible,.password-input:focus-visible,.login-button:focus-visible,.account-switch:focus-visible{outline:3px solid #f5cf56;outline-offset:4px}
+.login-form{width:min(100%,340px);margin:0 auto;text-align:left}
+.back-button{padding:0;border:0;background:none;color:#f5bd69;font:600 .9rem "Work Sans",sans-serif;cursor:pointer}
+.login-profile{display:grid;justify-items:center;gap:10px;margin:20px 0 24px}
+.login-profile .profile-avatar{width:76px;border-radius:12px;font-size:1.3rem}
+.login-profile h2{margin:0;font:600 1.3rem/1.2 "Work Sans",sans-serif}
+.login-form label{display:block;margin-bottom:7px;font-size:.92rem;font-weight:600}
+.password-input{width:100%;min-height:48px;padding:11px 13px;border:1px solid #b99593;border-radius:9px;background:#fff;color:#241213;font:500 1rem "Work Sans",sans-serif}
+.login-button{width:100%;min-height:48px;margin-top:15px;border:0;border-radius:9px;background:#f5cf56;color:#302112;font:700 1rem "Work Sans",sans-serif;cursor:pointer;transition:transform 140ms ease-out,background-color 140ms ease-out}
+.login-button:hover{background:#ffdb6b}
+.login-button:active{transform:scale(.98)}
+.login-button:disabled{opacity:.65;cursor:wait}
+.auth-error{margin:10px 0 0;color:#ffd0c9;font-size:.9rem}
+.auth-status{margin:20px 0 0;color:#f0d6d3;font-size:.9rem}
+.app-account{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:0 0 12px}
+.app-account-name{color:var(--muted);font-size:.85rem;font-weight:600}
+.account-switch{padding:5px 0;border:0;background:none;color:var(--teal);font:600 .85rem "Work Sans",sans-serif;cursor:pointer}
+.account-switch:disabled{opacity:.55;cursor:wait}
+@media (max-width:420px){.auth-screen{padding:24px 16px}.auth-panel h1{font-size:1.85rem}.profile-grid{gap:16px}.profile-avatar{width:min(28vw,120px)}}
+@media (prefers-reduced-motion:reduce){.profile-avatar,.login-button{transition:none}}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 20px;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none}
 .card.static{cursor:default;min-height:170px;user-select:text}
 .cat{font-size:.8rem;color:var(--muted);margin-bottom:10px}

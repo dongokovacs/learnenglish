@@ -10,7 +10,44 @@
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<div class="wrap">
+<main class="auth-screen" id="authScreen" aria-labelledby="authTitle">
+  <section class="auth-panel">
+    <p class="auth-kicker">ANGOL GYAKORLÓ</p>
+    <h1 id="authTitle">Ki tanul ma?</h1>
+    <p class="auth-lead" id="authLead">Válaszd ki a profilodat a folytatáshoz.</p>
+
+    <div class="profile-grid" id="profilePicker" hidden>
+      <button class="profile-tile" type="button" data-profile="dani">
+        <span class="profile-avatar profile-avatar--dani" aria-hidden="true"><span>DA</span></span>
+        <span class="profile-name">Dani</span>
+      </button>
+      <button class="profile-tile" type="button" data-profile="demo">
+        <span class="profile-avatar profile-avatar--demo" aria-hidden="true"><span>DE</span></span>
+        <span class="profile-name">Demo</span>
+      </button>
+    </div>
+
+    <form class="login-form" id="loginForm" hidden>
+      <button class="back-button" id="backToProfiles" type="button">Vissza a profilokhoz</button>
+      <div class="login-profile">
+        <span class="profile-avatar" id="selectedAvatar" aria-hidden="true"></span>
+        <h2 id="selectedName"></h2>
+      </div>
+      <label for="password">Jelszó</label>
+      <input class="password-input" id="password" type="password" name="password" autocomplete="current-password" required>
+      <p class="auth-error" id="authError" role="alert" hidden></p>
+      <button class="login-button" id="loginButton" type="submit">Belépés</button>
+    </form>
+
+    <p class="auth-status" id="authStatus" role="status" aria-live="polite">A belépés ellenőrzése…</p>
+  </section>
+</main>
+
+<div class="wrap" id="appShell" hidden>
+  <div class="app-account">
+    <span class="app-account-name" id="activeUserName"></span>
+    <button class="account-switch" id="switchUser" type="button">Fiókváltás</button>
+  </div>
   <h1>Angol jelzők</h1>
   <p class="sub">Jellemzők, hétköznapi és tesztelői szavak. Napi 10 perc.</p>
 
@@ -54,6 +91,6 @@
   <p class="foot">A haladásod és az ismétlési időpontok csak ebben a böngészőben mentődnek. <button id="reset">Haladás törlése</button></p>
 </div>
 
-<script type="module" src="./src/app.js"></script>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>

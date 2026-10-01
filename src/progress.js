@@ -1,10 +1,18 @@
 /* Ismétlési rendszer: szintenként 3, 7, 14, 30, 60 nap múlva jön elő újra */
-const DAY=864e5, INT=[3,7,14,30,60], KEY="angol-jelzok-srs", OLD="angol-jelzok-known";
+const DAY=864e5, INT=[3,7,14,30,60], USER_ID=document.body.dataset.userId||"guest";
+const KEY=`angol-jelzok-srs:${USER_ID}`, LEGACY="angol-jelzok-srs", OLD="angol-jelzok-known";
 let srs={};
 try{
-  const s=localStorage.getItem(KEY);
+  let s=localStorage.getItem(KEY);
+  if(!s&&USER_ID==="dani"){
+    s=localStorage.getItem(LEGACY);
+    if(s)localStorage.setItem(KEY,s);
+    else{
+      const old=localStorage.getItem(OLD);
+      if(old){JSON.parse(old).forEach(w=>srs[w]={l:0,d:Date.now()+INT[0]*DAY});localStorage.setItem(KEY,JSON.stringify(srs))}
+    }
+  }
   if(s)srs=JSON.parse(s)||{};
-  else{const o=localStorage.getItem(OLD);if(o)JSON.parse(o).forEach(w=>srs[w]={l:0,d:Date.now()+INT[0]*DAY})}
 }catch(e){srs={}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(srs))}catch(e){}}
 const isKnown=w=>!!srs[w];
