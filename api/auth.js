@@ -5,6 +5,7 @@ const SESSION_AGE_SECONDS = 60 * 60 * 24 * 7;
 const USERS = {
   dani: { name: "Dani", passwordEnv: "DANI_PASSWORD" },
   demo: { name: "Demo", passwordEnv: "DEMO_PASSWORD" },
+  marcsi: { name: "Marcsi", passwordEnv: "MARCSI_PASSWORD" },
 };
 
 function json(res, status, body) {

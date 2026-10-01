@@ -2,13 +2,14 @@ const assert = require("node:assert/strict");
 const { after, before, test } = require("node:test");
 const auth = require("../api/auth.js");
 
-const envKeys = ["SESSION_SECRET", "DANI_PASSWORD", "DEMO_PASSWORD"];
+const envKeys = ["SESSION_SECRET", "DANI_PASSWORD", "DEMO_PASSWORD", "MARCSI_PASSWORD"];
 const previousEnv = Object.fromEntries(envKeys.map((key) => [key, process.env[key]]));
 
 before(() => {
   process.env.SESSION_SECRET = "test-only-session-secret-with-32-bytes";
   process.env.DANI_PASSWORD = "test-only-dani-password";
   process.env.DEMO_PASSWORD = "test-only-demo-password";
+  process.env.MARCSI_PASSWORD = "test-only-marcsi-password";
 });
 
 after(() => {
@@ -62,4 +63,10 @@ test("fails closed when a profile password is not configured", () => {
   delete process.env.DEMO_PASSWORD;
   const response = invoke("POST", { body: { username: "demo", password: "any" } });
   assert.equal(response.statusCode, 503);
+});
+
+test("allows Marcsi to sign in with her own profile", () => {
+  const login = invoke("POST", { body: { username: "marcsi", password: process.env.MARCSI_PASSWORD } });
+  assert.equal(login.statusCode, 200);
+  assert.deepEqual(login.body.user, { id: "marcsi", name: "Marcsi" });
 });

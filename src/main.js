@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id);
 const profiles = {
   dani: { name: "Dani", initials: "DA" },
   demo: { name: "Demo", initials: "DE" },
+  marcsi: { name: "Marcsi", initials: "MA" },
 };
 
 const authScreen = $("authScreen");

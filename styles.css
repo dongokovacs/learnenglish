@@ -60,6 +60,7 @@ select{flex:1;min-width:0;font:500 .9rem "Work Sans",sans-serif;color:var(--ink)
 .profile-avatar{display:grid;place-items:center;width:128px;aspect-ratio:1;border-radius:14px;color:#fff;font-size:2rem;font-weight:700;transition:transform 180ms cubic-bezier(.23,1,.32,1),box-shadow 180ms ease}
 .profile-avatar--dani{background:#0877e8}
 .profile-avatar--demo{background:#f3bd08;color:#423100}
+.profile-avatar--marcsi{background:#e94e72}
 .profile-name{font-size:1rem;font-weight:600}
 .profile-tile:hover .profile-avatar{transform:translateY(-3px);box-shadow:0 12px 24px #17070a55}
 .profile-tile:active .profile-avatar{transform:scale(.97)}
